@@ -11,6 +11,6 @@ $variabel2 ="Bundar";
     <title>Document</title>
 </head>
 <body>
-    <h1><i><?php echo "\"$variabel1 saya $variabel2, $variabel2 $variabel1 saya.\"" ?></i></h1>
+    <h1><i><?php echo ' "'. $variabel1 . ' saya ' . $variabel2 . ', ' . $variabel2 . '  ' . $variabel1 . ' saya." ' ?></i></h1>
 </body>
 </html>
