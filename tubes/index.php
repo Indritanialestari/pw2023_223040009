@@ -112,7 +112,7 @@ if (isset($_POST['cari'])) {
             </div>
           </div>
           <div class="tab-pane" role="tabpanel" id="tab-2">
-            <h1 class="text-center mt-5 mb-5">Manga information has not been added or available yet!</h1>
+            <h1 class="text-center mt-5 mb-5">Information has not been added or available yet!</h1>
           </div>
         </div>
       </div>
