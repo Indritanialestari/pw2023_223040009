@@ -4,6 +4,10 @@ session_start();
 if (!isset($_SESSION["username"])) {
   header("Location: login.php");
 }
+
+if ($_SESSION['level']!='admin'){
+  header("location: ../index.php");
+}
 require 'functions.php';
 
 $nusantara = query("SELECT * FROM nusantara");
@@ -28,7 +32,6 @@ if (isset($_POST['cari'])) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
   <link rel="stylesheet" href="../css/Lightbox-Gallery.css">
   <link rel="stylesheet" href="../css/Navigation-with-Search.css">
-  <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/style.css">
   <style>
     html {
@@ -92,7 +95,7 @@ if (isset($_POST['cari'])) {
                   <a class="btn btn-danger justify-content-end" href="hapus.php?id=<?= $row['id']; ?>" onclick="return confirm ('are you sure?');">Delete</a>
                 </div>
                 <div class="card-group shadow mb-4">
-                  <div class="card-body" style="max-height: 1100px; min-height: 500px">
+                  <div class="card-body" style="max-height: 1500px; min-height: 500px">
                     <img class="card-img-top img-fluid max-foto mb-3" src="../img/<?= $row['foto']; ?>" style="max-height: 200px; min-height: 200px;">
                     <p><?= $row['alat_bahan']; ?></p>
                     <p><?= $row['cara_membuat']; ?></p>

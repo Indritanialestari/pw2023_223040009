@@ -1,6 +1,8 @@
 <?php
 require 'php/functions.php';
 
+session_start();
+
 $nusantara = query("SELECT * FROM nusantara");
 
 if (isset($_POST['cari'])) {
@@ -25,6 +27,8 @@ if (isset($_POST['cari'])) {
   <link rel="stylesheet" href="css/Lightbox-Gallery.css">
   <link rel="stylesheet" href="css/Navigation-with-Search.css">
   <link rel="stylesheet" href="css/styles.css">
+  <script src="https://unpkg.co/gsap@3/dist/gsap.min.js"></script>
+
   <style>
     html {
       scroll-behavior: smooth;
@@ -34,7 +38,7 @@ if (isset($_POST['cari'])) {
 
 <body id="page-top">
   <nav class="navbar navbar-light navbar-expand-md navigation-clean-search sticky-top" id="page-top">
-    <div class="container">
+    <div class="container" id="container">
       <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
         <span class="sr-only">Toggle navigation</span>
         <span class="navbar-toggler-icon"></span>
@@ -49,11 +53,18 @@ if (isset($_POST['cari'])) {
             <label for="search-field">
               <i class="fa fa-search"></i>
             </label>
-            <input class="form-control search-field" type="text" id="search-field" name="keyword" autocomplete="off" placeholder="Enter keywords ...">
-            <button type="submit" name="cari" class="tombol-cari">Cari!</button>
+            <input class="form-control search-field" type="text" id="search-field" name="keyword" autocomplete="off" placeholder="Enter keywords ..." id="keyword">
+            <button type="submit" name="cari" class="tombol-cari" id="tombol-cari">Cari!</button>
           </div>
         </form>
+        <?php if(isset($_SESSION['hash'])){
+
+         ?>
+
+        <a class="btn btn-light action-button" role="button" data-bs-hover-animate="pulse" href="php/logout.php" style="background-color: black;">Logout</a>
+        <?php } else { ?>
         <a class="btn btn-light action-button" role="button" data-bs-hover-animate="pulse" href="php/login.php" style="background-color: black;">Login</a>
+      <?php }; ?>
       </div>
     </div>
   </nav>
@@ -75,10 +86,44 @@ if (isset($_POST['cari'])) {
       </div>
     </div>
   </div>
+
   <!-- Background image -->
       <div class="intro">
         <h2 class="text-center" id="List" style="margin-top: 0px">List Masakan</h2>
       </div>
+
+      <div class="group">
+        <div class="item" style="--url: url('../img/miekocok.jpg')">
+          <div class="overlay">
+          </div>
+          <div class="menu">
+            <label>Mie Kocok</label>
+          </div>
+        </div>
+        <div class="item" style="--url: url('../img/bikaambon.jpeg')">
+          <div class="overlay">
+          </div>
+          <div class="menu">
+            <label>Bika Ambon</label>
+          </div>
+        </div>
+        <div class="item" style="--url: url('../img/bakso.jpg')">
+          <div class="overlay">
+          </div>
+          <div class="menu">
+            <label>Bakso</label>
+          </div>
+        </div>
+        <div class="item" style="--url: url('../img/gudeg.jpg')">
+          <div class="overlay">
+          </div>
+          <div class="menu">
+            <label>Gudeg</label>
+          </div>
+        </div>
+      </div>
+      <script src="js/scripts.js"></script>
+
       <div class="container">
         <ul class="nav nav-tabs">
           <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1">Nusantara</a></li>
@@ -112,7 +157,7 @@ if (isset($_POST['cari'])) {
             </div>
           </div>
           <div class="tab-pane" role="tabpanel" id="tab-2">
-            <h1 class="text-center mt-5 mb-5">Manga information has not been added or available yet!</h1>
+            <h1 class="text-center mt-5 mb-5">Information has not been added or available yet!</h1>
           </div>
         </div>
       </div>

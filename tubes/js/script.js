@@ -7,14 +7,14 @@ tombolCari.style.display = 'none';
 
 
 // event ketika menuliskan keyword
-keyword.addEventListener('keydown', function () {
+keyword.onkeyup = function () {
   //ajax
 
   //fetch()
   fetch('ajax/ajax_cari.php?keyword=' + keyword.value)
     .then((respone) => respone.text())
     .then((respone) => (container.innerHTML = respone));
-});
+};
 
 // preview image untuk tambah dan ubah
 function previewImage() {

@@ -8,7 +8,7 @@ if (!isset($_GET['id'])) {
 
 $id = $_GET['id'];
 
-$row = query("SELECT * FROM nusantara WHERE id = $id");
+$row = query("SELECT * FROM nusantara WHERE id = $id")[0];
 ?>
 
 <!DOCTYPE html>
@@ -60,9 +60,9 @@ $row = query("SELECT * FROM nusantara WHERE id = $id");
       </div>
       <div class="row">
         <div class="col">
-          <h1 class="mb-5"><?= $row['judul']; ?></h1>
-          <h3><?= $row['alat_bahan']; ?></h3>
-          <h3><?= $row['cara_membuat']; ?></h3>
+          <h1 style="text-align: center;" class="mb-5"><?= $row['judul']; ?></h1>
+          <p style="font-size: 20px;"><?= $row['alat_bahan']; ?></p>
+          <p style="font-size: 20px; text-align: justify;"><?= $row['cara_membuat']; ?></p>
           <a href="../index.php" class="btn btn-dark mt-3 shadow">Back</a>
         </div>
       </div>

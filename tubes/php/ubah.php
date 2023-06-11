@@ -13,7 +13,7 @@ if (!isset($_GET['id'])) {
 
 $id = $_GET['id'];
 
-$row = query("SELECT * FROM nusantara WHERE id = $id");
+$row = query("SELECT * FROM nusantara WHERE id = $id")[0];
 
 if (isset($_POST['ubah'])) {
   if (ubah($_POST) > 0) {

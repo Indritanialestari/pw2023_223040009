@@ -14,9 +14,9 @@ function query($query)
   $conn = koneksi();
   $result = mysqli_query($conn, $query);
 
-  if (mysqli_num_rows($result) == 1) {
-    return mysqli_fetch_assoc($result);
-  }
+  // if (mysqli_num_rows($result) == 1) {
+  //  return mysqli_fetch_assoc($result);
+  // }
 
   $rows = [];
   while ($row = mysqli_fetch_assoc($result)) {
@@ -244,7 +244,7 @@ function registrasi($data)
   // insert ke tabel user
   $query = "INSERT INTO user
             VALUES
-            (id, '$username', '$password_baru')";
+            (id, '$username', '$password_baru', 'user')";
   mysqli_query($conn, $query) or die(mysqli_error($conn));
   return mysqli_affected_rows($conn);
 }

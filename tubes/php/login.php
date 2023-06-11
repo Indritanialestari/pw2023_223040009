@@ -30,13 +30,32 @@ if (isset($_SESSION['username'])) {
 if (isset($_POST['submit'])) {
   $username = $_POST['username'];
   $password = $_POST['password'];
-  $cek_user = mysqli_query(koneksi(), "SELECT * FROM user WHERE username = '$username'");
+  $cek_user = query("SELECT * FROM user WHERE username = '$username'")[0];
   //mencocokkan username dan password
-  if (mysqli_num_rows($cek_user) > 0) {
-    $row = mysqli_fetch_assoc($cek_user);
+  if ($cek_user > 0) {
+    $row = $cek_user;
     if (password_verify($password, $row['password'])) {
       $_SESSION['username'] = $_POST['username'];
       $_SESSION['hash'] = hash('sha256', $row['id'],);
+      $_SESSION['level'] = $cek_user['level'];
+      //jika remember me decentang
+      if (isset($_POST['remember'])) {
+        setcookie('username', $row['username'], time() + 60 * 60 * 24);
+        $hash = hash('sha256', $row['id']);
+        setcookie('hash', $hash, time() + 60 * 60 * 24);
+      }
+      if (hash('sha256', $row['id']) == $_SESSION['hash']) {
+        header("Location: admin.php");
+        die;
+      }
+      header("Location: ../index.php");
+      die;
+    }
+    //cek kalau tidak di enkripsi
+    if ($password === $row['password']) {
+      $_SESSION['username'] = $_POST['username'];
+      $_SESSION['hash'] = hash('sha256', $row['id'],);
+      $_SESSION['level'] = $cek_user['level'];
       //jika remember me decentang
       if (isset($_POST['remember'])) {
         setcookie('username', $row['username'], time() + 60 * 60 * 24);
